@@ -7,6 +7,7 @@ import Pins from './Pins';
 import { userQuery } from '../utils/data';
 import { fetchUser } from '../utils/fetchUser';
 import { client } from '../client';
+import defaultThumb from '../assets/default.jpeg';
 
 const Home = () => {
   const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -39,7 +40,7 @@ const Home = () => {
             <h2 className="font-bold text-2xl">Social APP</h2>
           </Link>
           <Link to={`/user-profile/${user?._id}`}>
-            <img src={user?.image} alt="logo" className="w-28" />
+            <img src={user?.image ? user.image : `${defaultThumb}`} alt="logo" className="w-28" />
           </Link>
         </div>
         {toggleSidebar && (

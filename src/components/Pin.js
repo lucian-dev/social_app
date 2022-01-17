@@ -6,6 +6,7 @@ import { AiTwotoneDelete } from 'react-icons/ai';
 import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 import { client, urlFor } from '../client';
 import { fetchUser } from '../utils/fetchUser';
+import defaultThumb from '../assets/default.jpeg';
 
 const Pin = ({ pin }) => {
   const [postHovered, setPostHovered] = useState(false);
@@ -119,7 +120,7 @@ const Pin = ({ pin }) => {
         )}
       </div>
       <Link to={`/user-profile/${postedBy?._id}`} className="flex gap-2 mt-2 items-center">
-        <img className="w-8 h-8 rounded-full object-cover" src={postedBy?.image} alt="user-avatar" />
+        <img className="w-8 h-8 rounded-full object-cover" src={postedBy?.image ? postedBy.image : `${defaultThumb}`} alt="user-avatar" />
         <p className="font-semibold capitalize">{postedBy?.userName}</p>
       </Link>
     </div>
