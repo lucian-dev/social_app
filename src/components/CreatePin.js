@@ -15,7 +15,6 @@ const CreatePin = ({ user }) => {
   const [category, setCategory] = useState(null);
   const [imageAsset, setImageAsset] = useState(null);
   const [wrongImageType, setWrongImageType] = useState(null);
-
   const navigate = useNavigate();
 
   const uploadImage = (e) => {
@@ -24,7 +23,10 @@ const CreatePin = ({ user }) => {
       setWrongImageType(false);
       setLoading(true);
       client.assets
-        .upload('image', selectedFile, { contentType: selectedFile.type, filename: selectedFile.name })
+        .upload('image', selectedFile, {
+          contentType: selectedFile.type,
+          filename: selectedFile.name,
+        })
         .then((document) => {
           setImageAsset(document);
           setLoading(false);
@@ -72,7 +74,11 @@ const CreatePin = ({ user }) => {
 
   return (
     <div className="flex flex-col justify-center items-center mt-5 lg:h-4/5">
-      {fields && <p className="text-red-500 mb-5 text-xl transition-all duration-150 ease-in">Please fill all the fields</p>}
+      {fields && (
+        <p className="text-red-500 mb-5 text-xl transition-all duration-150 ease-in">
+          Please fill all the fields
+        </p>
+      )}
       <div className="flex lg:flex-row flex-col justify-center items-center bg-white lg:p-5 p-3 lg:w-4/5 w-full">
         <div className="bg-secondaryColor p-3 flex flex-0.7 w-full">
           <div className="flex justify-center items-center flex-col border-2 border-dotted border-gray-300 p-3 w-full h-420">
@@ -87,7 +93,9 @@ const CreatePin = ({ user }) => {
                     </p>
                     <p className="text-lg">Click to upload</p>
                   </div>
-                  <p className="mt-32 text-gray-400">*Use high-quality JPG, SVG, PNG less than 20MB</p>
+                  <p className="mt-32 text-gray-400">
+                    *Use high-quality JPG, SVG, PNG less than 20MB
+                  </p>
                 </div>
                 <input type="file" name="upload-image" onChange={uploadImage} className="w-0 h-0" />
               </label>
@@ -138,19 +146,31 @@ const CreatePin = ({ user }) => {
           <div className="flex flex-col">
             <div>
               <p className="mb-2 font-semibold text-lg sm:text-xl">Choose pin category</p>
-              <select onChange={(e) => setCategory(e.target.value)} className="outline-none w-4/5 border-b-2 border-gray-200 p-2 rounded-md cursor-pointer" required>
+              <select
+                onChange={(e) => setCategory(e.target.value)}
+                className="outline-none w-4/5 border-b-2 border-gray-200 p-2 rounded-md cursor-pointer"
+                required
+              >
                 <option value="other" className="bg-white">
                   Select category
                 </option>
                 {categories.map((category) => (
-                  <option className="text-base border-0 outline-none bg-white text-black" value={category.name} key={category.name}>
+                  <option
+                    className="text-base border-0 outline-none bg-white text-black"
+                    value={category.name}
+                    key={category.name}
+                  >
                     {category.name}
                   </option>
                 ))}
               </select>
             </div>
             <div className="flex justify-end items-end mt-5">
-              <button type="button" onClick={savePin} className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none">
+              <button
+                type="button"
+                onClick={savePin}
+                className="bg-red-500 text-white font-bold p-2 rounded-full w-28 outline-none"
+              >
                 Save pin
               </button>
             </div>
